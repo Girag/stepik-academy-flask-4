@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block main %}
+  <main class="container mt-3 mb-5">
+    <section>
+    <h1 class="h1 text-center mx-auto mt-4 py-5"><strong>Найдите идеального <br>репетитора английского, <br>занимайтесь онлайн</strong></h1>
+    <div class="text-center mb-5">
+      <div class="btn-group mx-auto mb-0" role="group" aria-label="Basic example">
+        {% for goal in goals %}
+        <a href="{{ url_for('render_goals', goal=goal.key_en) }}" class="btn btn-outline-secondary">{{ goal.icon }} {{ goal.value_ru }}</a>
+        {% endfor %}
+      </div>
+    </div>
+    <h2 class="h5 text-center mb-5">Наши преподаватели</h2>
+    <div class="row">
+      <div class="col-12 col-lg-10 offset-lg-1 m-auto">
+        {% for teacher in teachers %}
+        <div class="card mb-4">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-3"><img src="{{ teacher.picture }}" class="img-fluid" alt=""></div>
+              <div class="col-9">
+                <p class="float-right">Рейтинг: {{ teacher.rating }} Ставка: {{ teacher.price }}₽ / час</p>
+                <h2 class="h4">{{ teacher.name }}</h2>
+                <p>{{ teacher.about }}</p>
+                <a href="{{ url_for('render_profiles', teacher_id=teacher.id) }}" class="btn btn-outline-primary btn-sm mr-3 mb-2">Показать информацию и расписание</a>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+
+    <h2 class="text-center mt-5 mb-3">Не нашли своего репетитора?</h2>
+    <p class="text-center mb-4">Расскажите, кто вам нужен и мы подберем его сами</p>
+    <div class="text-center pb-5">
+        <a href="{{ url_for('render_request') }}" class="btn btn-primary">Заказать подбор</a>
+    </div>
+
+
+
+  </main>
+{% endblock %}
